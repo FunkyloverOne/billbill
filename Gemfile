@@ -48,3 +48,8 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'mini_racer', platforms: :ruby
+
+gem 'devise'
+gem 'action_mailer_auto_url_options',
+    github: 'sunny/action_mailer_auto_url_options',
+    branch: 'rails5'
