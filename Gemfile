@@ -53,3 +53,4 @@ gem 'devise'
 gem 'action_mailer_auto_url_options',
     github: 'sunny/action_mailer_auto_url_options',
     branch: 'rails5'
+gem 'bootstrap-sass', '~> 3.3.6'
