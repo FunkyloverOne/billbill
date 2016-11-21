@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactOnRails from 'react-on-rails';
 
-import HelloWorld from '../containers/HelloWorld';
+import HelloWorldContainer from '../containers/HelloWorldContainer';
 
-const HelloWorldApp = (props) => (
-  <HelloWorld {...props} />
+// _railsContext is the Rails context, providing contextual information for rendering
+const HelloWorldApp = (props, _railsContext) => (
+  <HelloWorldContainer {...props} />
 );
 
 // This is how react_on_rails can see the HelloWorldApp in the browser.
