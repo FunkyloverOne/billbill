@@ -1,33 +1,31 @@
+<div id="popupContainer"></div>
 <div class="row">
-  <div class="col-md-4">
-    <%= react_component(
-          "DebtBoard",
-          props: {
-            title: 'They owe me',
-            cards: [
-              {
-                title: 'milky way',
-                amount: 0.99,
-                user: {avatarUrl: 'https://avatars3.githubusercontent.com/u/6454731?v=3&s=40'}
-              },
-              {
-                title: 'golden gaytime ice cream',
-                amount: 1.99,
-                user: {avatarUrl: 'https://avatars3.githubusercontent.com/u/6454731?v=3&s=40'}
-              }
-            ]
-          },
-          prerender: false) %>
-  </div>
-  <div class="col-md-4">
-    <%= react_component(
-          "DebtBoard",
-          props: {
-            title: 'I owe them',
-            cards: []
-          },
-          prerender: false) %>
-  </div>
+  <%= react_component(
+        "DebtBoard",
+        props: {
+          panels: [
+            {
+              title: 'They owe me',
+              cards: [
+                {
+                  title: 'milky way',
+                  amount: 0.99,
+                  user: {avatarUrl: 'https://avatars3.githubusercontent.com/u/6454731?v=3&s=40'}
+                },
+                {
+                  title: 'golden gaytime ice cream',
+                  amount: 1.99,
+                  user: {avatarUrl: 'https://avatars3.githubusercontent.com/u/6454731?v=3&s=40'}
+                }
+              ]
+            },
+            {
+              title: 'I owe them',
+              cards: []
+            },
+          ]
+        },
+        prerender: false) %>
   <div class="col-md-4">
     <div class="panel panel-default">
       <!-- Default panel contents -->
