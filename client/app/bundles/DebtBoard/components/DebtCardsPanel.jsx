@@ -2,6 +2,11 @@ import React, { PropTypes } from 'react';
 import DebtCard from '../components/DebtCard';
 
 export default class DebtCardsPanel extends React.Component {
+  constructor(props) {
+    super(props);
+    this.id = props.id;
+  }
+
   static propTypes = {
     title: PropTypes.string.isRequired,
     cards: PropTypes.array.isRequired,
@@ -10,7 +15,7 @@ export default class DebtCardsPanel extends React.Component {
 
   handleNewDebtClick = (e) => {
     e.preventDefault();
-    this.props.newDebt();
+    this.props.newDebt(this);
   };
 
   render() {

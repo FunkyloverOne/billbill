@@ -8,6 +8,16 @@ import DebtForm from '../components/DebtForm';
 
 // _railsContext is the Rails context, providing contextual information for rendering
 export default class DebtBoard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      cardLists:
+        props.panels.map(
+          (panel) => JSON.parse(JSON.stringify(panel.cards))
+        ),
+    };
+  }
+
   componentDidMount() {
     var popupsCount = document.getElementById('popupContainer').children.length;
     if (popupsCount > 0) return;
@@ -17,9 +27,15 @@ export default class DebtBoard extends React.Component {
     );
   }
 
-  newDebtPopup = () => {
-    const submit = () => {
-      console.log(this);
+  newDebtPopup = (target) => {
+    const submit = (data) => {
+      this.setState((prevState) => {
+        let cardLists = JSON.parse(JSON.stringify(prevState.cardLists));
+        cardLists[target.id].push(data);
+        return {cardLists: cardLists};
+      });
+
+      Popup.close();
     }
     Popup.create({
       content: <DebtForm submit={submit} />,
@@ -30,10 +46,15 @@ export default class DebtBoard extends React.Component {
     return (
       <div>
         {
-          this.props.panels.map((panel) => {
+          this.props.panels.map((panel, i) => {
             return (
               <div className="col-md-4" key={panel.title}>
-                <DebtCardsPanel {...panel} newDebt={this.newDebtPopup} />
+                <DebtCardsPanel
+                  id={i}
+                  title={panel.title}
+                  cards={this.state.cardLists[i]}
+                  newDebt={this.newDebtPopup}
+                />
               </div>
             );
           })
