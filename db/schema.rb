@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20161204133659) do
   enable_extension "plpgsql"
 
   create_table "bills", force: :cascade do |t|
+    t.string   "title",      null: false
     t.integer  "loaner_id"
     t.integer  "debtor_id"
     t.integer  "status",     null: false
