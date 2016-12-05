@@ -10,10 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161003202919) do
+ActiveRecord::Schema.define(version: 20161204133659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bills", force: :cascade do |t|
+    t.integer  "loaner_id"
+    t.integer  "debtor_id"
+    t.integer  "status",     null: false
+    t.float    "debt",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["debtor_id"], name: "index_bills_on_debtor_id", using: :btree
+    t.index ["loaner_id"], name: "index_bills_on_loaner_id", using: :btree
+  end
+
+  create_table "contactings", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "contact_id"
+    t.index ["contact_id"], name: "index_contactings_on_contact_id", using: :btree
+    t.index ["user_id", "contact_id"], name: "index_contactings_on_user_and_contact", unique: true, using: :btree
+    t.index ["user_id"], name: "index_contactings_on_user_id", using: :btree
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "full_name",              default: "", null: false
@@ -40,4 +59,8 @@ ActiveRecord::Schema.define(version: 20161003202919) do
     t.index ["username"], name: "index_users_on_username", unique: true, using: :btree
   end
 
+  add_foreign_key "bills", "users", column: "debtor_id"
+  add_foreign_key "bills", "users", column: "loaner_id"
+  add_foreign_key "contactings", "users"
+  add_foreign_key "contactings", "users", column: "contact_id"
 end
