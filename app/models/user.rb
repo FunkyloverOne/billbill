@@ -15,5 +15,5 @@ class User < ApplicationRecord
                     default_url: '/assets/missing.jpg'
   validates_attachment_content_type :avatar, content_type: %r{\Aimage/.*\z/}
 
-  validates :username, presence: true
+  validates :username, presence: true, uniqueness: true
 end
