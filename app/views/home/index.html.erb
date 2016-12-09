@@ -1,29 +1,23 @@
 <div id="popupContainer"></div>
 <div class="row">
   <%= react_component(
-        "DebtBoard",
+        'DebtBoard',
         props: {
-          panels: [
+          loans: [
             {
-              title: 'They owe me',
-              cards: [
-                {
-                  title: 'milky way',
-                  amount: 0.99,
-                  user: {avatarUrl: asset_path('profile-photos/1.png')}
-                },
-                {
-                  title: 'golden gaytime ice cream',
-                  amount: 1.99,
-                  user: {avatarUrl: asset_path('profile-photos/2.png')}
-                }
-              ]
+              title: 'milky way',
+              amount: 0.99,
+              user: {avatarUrl: current_user.avatar.url(:thumb)}
             },
             {
-              title: 'I owe them',
-              cards: []
-            },
-          ]
+              title: 'golden gaytime ice cream',
+              amount: 1.99,
+              user: {avatarUrl: asset_path('profile-photos/2.png')}
+            }
+          ],
+          debts: [],
+          createLoansPath: create_loan_bills_path,
+          createDebtsPath: create_debt_bills_path
         },
         prerender: false) %>
   <div class="col-md-4">

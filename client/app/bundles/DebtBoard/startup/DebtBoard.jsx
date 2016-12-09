@@ -2,6 +2,8 @@ import React from 'react';
 import ReactOnRails from 'react-on-rails';
 import ReactDom from 'react-dom';
 import Popup from 'react-popup';
+import axios from 'axios';
+import ReactTooltip from 'react-tooltip';
 
 import DebtCardsPanel from '../components/DebtCardsPanel';
 import DebtForm from '../components/DebtForm';
@@ -11,10 +13,8 @@ export default class DebtBoard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cardLists:
-        props.panels.map(
-          (panel) => JSON.parse(JSON.stringify(panel.cards))
-        ),
+      loans: JSON.parse(JSON.stringify(props.loans)),
+      debts: JSON.parse(JSON.stringify(props.debts)),
     };
   }
 
@@ -27,13 +27,18 @@ export default class DebtBoard extends React.Component {
     );
   }
 
-  newDebtPopup = (target) => {
+  newLoanPopup = () => {
     const submit = (data) => {
-      this.setState((prevState) => {
-        let cardLists = JSON.parse(JSON.stringify(prevState.cardLists));
-        cardLists[target.id].push(data);
-        return {cardLists: cardLists};
-      });
+      axios.post(this.props.createLoansPath, data, {
+        headers: ReactOnRails.authenticityHeaders(),
+      }).then((response) => {
+          this.setState(
+            (prevState) => ({loans: prevState.loans.concat(response.data)})
+          );
+        })
+        .catch((error) => {
+          console.log(error);
+        });
 
       Popup.close();
     }
@@ -45,20 +50,21 @@ export default class DebtBoard extends React.Component {
   render() {
     return (
       <div>
-        {
-          this.props.panels.map((panel, i) => {
-            return (
-              <div className="col-md-4" key={panel.title}>
-                <DebtCardsPanel
-                  id={i}
-                  title={panel.title}
-                  cards={this.state.cardLists[i]}
-                  newDebt={this.newDebtPopup}
-                />
-              </div>
-            );
-          })
-        }
+        <div className="col-md-4">
+          <DebtCardsPanel
+            title='They owe me'
+            cards={this.state.loans}
+            newCard={this.newLoanPopup}
+          />
+        </div>
+        <div className="col-md-4">
+          <DebtCardsPanel
+            title='I owe them'
+            cards={this.state.debts}
+            newCard={this.newDebtPopup}
+          />
+        </div>
+        <ReactTooltip />
       </div>
     );
   }

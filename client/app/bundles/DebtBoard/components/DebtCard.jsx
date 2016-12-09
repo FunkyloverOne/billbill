@@ -15,8 +15,8 @@ const DebtCard = ({ title, amount, user }) => (
           </div>
           <div className="row">
             <div className="col-md-10">
-              <a href="#" className="thumbnail card-avatar">
-                <img src={user.avatarUrl} alt="..." />
+              <a className="thumbnail card-avatar" data-tip={user.fullName}>
+                <img src={user.avatarUrl} alt={user.fullName} />
               </a>
             </div>
           </div>

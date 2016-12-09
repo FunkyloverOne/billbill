@@ -10,12 +10,12 @@ export default class DebtCardsPanel extends React.Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
     cards: PropTypes.array.isRequired,
-    newDebt: PropTypes.func.isRequired,
+    newCard: PropTypes.func.isRequired,
   };
 
-  handleNewDebtClick = (e) => {
+  handleNewCardClick = (e) => {
     e.preventDefault();
-    this.props.newDebt(this);
+    this.props.newCard();
   };
 
   render() {
@@ -35,7 +35,7 @@ export default class DebtCardsPanel extends React.Component {
           }
         </div>
         <div className="panel-footer">
-          <a href="#" onClick={this.handleNewDebtClick}>Add new debt</a>
+          <a onClick={this.handleNewCardClick}>Add new debt</a>
         </div>
       </div>
     );

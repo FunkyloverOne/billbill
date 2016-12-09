@@ -21,7 +21,7 @@ export default class DebtForm extends React.Component {
   getData = () => ({
     title: this.state.title,
     amount: parseFloat(this.state.amount),
-    user: this.state.user,
+    debtors: [{email: this.state.user}],
   });
 
   handleSubmit = (e) => {
