@@ -55,3 +55,4 @@ gem 'action_mailer_auto_url_options',
     branch: 'rails5'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'composite_primary_keys', '=9.0.4'
+gem 'paperclip', '~> 5.1.0'
