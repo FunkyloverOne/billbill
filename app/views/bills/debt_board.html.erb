@@ -2,23 +2,7 @@
 <div class="row">
   <%= react_component(
         'DebtBoard',
-        props: {
-          loans: [
-            {
-              title: 'milky way',
-              amount: 0.99,
-              user: {avatarUrl: current_user.avatar.url(:thumb)}
-            },
-            {
-              title: 'golden gaytime ice cream',
-              amount: 1.99,
-              user: {avatarUrl: asset_path('profile-photos/2.png')}
-            }
-          ],
-          debts: [],
-          createLoansPath: create_loan_bills_path,
-          createDebtsPath: create_debt_bills_path
-        },
+        props: @debt_board_props,
         prerender: false) %>
   <div class="col-md-4">
     <div class="panel panel-default">

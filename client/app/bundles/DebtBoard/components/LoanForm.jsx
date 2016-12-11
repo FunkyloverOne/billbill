@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-export default class DebtForm extends React.Component {
+export default class LoanForm extends React.Component {
   constructor(props) {
     super(props);
 
@@ -21,7 +21,7 @@ export default class DebtForm extends React.Component {
   getData = () => ({
     title: this.state.title,
     amount: parseFloat(this.state.amount),
-    loaner: {email: this.state.user},
+    debtors: [{email: this.state.user}],
   });
 
   handleSubmit = (e) => {

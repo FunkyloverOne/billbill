@@ -6,6 +6,7 @@ import axios from 'axios';
 import ReactTooltip from 'react-tooltip';
 
 import DebtCardsPanel from '../components/DebtCardsPanel';
+import LoanForm from '../components/LoanForm';
 import DebtForm from '../components/DebtForm';
 
 // _railsContext is the Rails context, providing contextual information for rendering
@@ -28,12 +29,32 @@ export default class DebtBoard extends React.Component {
   }
 
   newLoanPopup = () => {
-    const submit = (data) => {
+    let submit = (data) => {
       axios.post(this.props.createLoansPath, data, {
         headers: ReactOnRails.authenticityHeaders(),
       }).then((response) => {
           this.setState(
             (prevState) => ({loans: prevState.loans.concat(response.data)})
+          );
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      Popup.close();
+    }
+    Popup.create({
+      content: <LoanForm submit={submit} />,
+    });
+  }
+
+  newDebtPopup = () => {
+    let submit = (data) => {
+      axios.post(this.props.createDebtsPath, data, {
+        headers: ReactOnRails.authenticityHeaders(),
+      }).then((response) => {
+          this.setState(
+            (prevState) => ({debts: prevState.debts.concat(response.data)})
           );
         })
         .catch((error) => {
