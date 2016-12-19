@@ -37,6 +37,7 @@ class BillsController < ApplicationController
       {
         title: b.title,
         amount: b.debt,
+        status: b.status,
         user: {
           avatarUrl: b.debtor.avatar.url(:thumb),
           fullName: b.debtor.full_name
@@ -50,6 +51,7 @@ class BillsController < ApplicationController
       {
         title: b.title,
         amount: b.debt,
+        status: b.status,
         user: {
           avatarUrl: b.loaner.avatar.url(:thumb),
           fullName: b.loaner.full_name
