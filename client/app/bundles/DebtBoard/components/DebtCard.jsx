@@ -32,21 +32,21 @@ export default class DebtCard extends React.Component {
         this.statusName = 'Declined';
         this.statusClass = 'danger';
         if (this.props.type == 'loan') {
+          this.buttons = [];
+        } else {
           this.buttons = [
             {class: 'success', title: 'Resend'},
             {class: 'warning', title: 'Cancel'},
           ];
-        } else {
-          this.buttons = [];
         }
         break;
       case 'pending':
-        this.statusName = 'Pending (Almost closed!)';
+        this.statusName = 'Pending (Almost Closed)';
         this.statusClass = 'info';
         if (this.props.type == 'loan') {
           this.buttons = [
             {class: 'success', title: 'Accept'},
-            {class: 'success', title: 'Decline'},
+            {class: 'danger', title: 'Decline'},
           ];
         } else {
           this.buttons = [
