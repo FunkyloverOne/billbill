@@ -30,7 +30,9 @@ export default class DebtCardsPanel extends React.Component {
           }
         </div>
         <div className="panel-footer">
-          <a onClick={this.handleNewCardClick}>Add new debt</a>
+          <button className="btn-link" onClick={this.handleNewCardClick}>
+            Add new debt
+          </button>
         </div>
       </div>
     );
