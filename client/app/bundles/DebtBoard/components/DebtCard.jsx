@@ -8,26 +8,67 @@ export default class DebtCard extends React.Component {
       case 'new_bill':
         this.statusName = 'New';
         this.statusClass = 'success';
+        if (this.props.type == 'loan') {
+          this.buttons = [{class: 'warning', title: 'Cancel'},];
+        } else {
+          this.buttons = [
+            {class: 'success', title: 'Accept'},
+            {class: 'danger', title: 'Decline'},
+          ];
+        }
         break;
       case 'open_bill':
         this.statusName = 'Open';
         this.statusClass = 'primary';
+        if (this.props.type == 'loan') {
+          this.buttons = [{class: 'success', title: 'Close'},];
+        } else {
+          this.buttons = [
+            {class: 'success', title: 'Close'},
+          ];
+        }
         break;
       case 'declined':
         this.statusName = 'Declined';
         this.statusClass = 'danger';
+        if (this.props.type == 'loan') {
+          this.buttons = [
+            {class: 'success', title: 'Resend'},
+            {class: 'warning', title: 'Cancel'},
+          ];
+        } else {
+          this.buttons = [];
+        }
         break;
       case 'pending':
-        this.statusName = 'Pending';
+        this.statusName = 'Pending (Almost closed!)';
         this.statusClass = 'info';
+        if (this.props.type == 'loan') {
+          this.buttons = [
+            {class: 'success', title: 'Accept'},
+            {class: 'success', title: 'Decline'},
+          ];
+        } else {
+          this.buttons = [
+            {class: 'warning', title: 'Cancel'},
+          ];
+        }
         break;
       case 'reopen':
         this.statusName = 'Reopen';
         this.statusClass = 'warning';
+        if (this.props.type == 'loan') {
+          this.buttons = [{class: 'success', title: 'Close'},];
+        } else {
+          this.buttons = [
+            {class: 'success', title: 'Close'},
+          ];
+        }
         break;
       default:
         this.statusName = 'Paid';
         this.statusClass = 'default';
+        this.buttons = [];
     };
   }
 
@@ -36,6 +77,23 @@ export default class DebtCard extends React.Component {
     amount: PropTypes.number.isRequired,
     status: PropTypes.string.isRequired,
     user: PropTypes.object.isRequired,
+  };
+
+  renderButtons = () => {
+    if (!this.buttons.length) return;
+    return (
+      <div className="btn-group btn-group-sm">
+        {
+          this.buttons.map((button) => {
+            return (
+              <button key={button.title} className={"btn btn-" + button.class}>
+                {button.title}
+              </button>
+            );
+          })
+        }
+      </div>
+    );
   };
 
   render() {
@@ -66,6 +124,7 @@ export default class DebtCard extends React.Component {
               </div>
             </div>
           </div>
+          {this.renderButtons()}
         </div>
       </div>
     );
